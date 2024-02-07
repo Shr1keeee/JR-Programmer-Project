@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,26 +14,22 @@ public class GameManager : MonoBehaviour
     private int indexBronzeRankTwo = 1;
     private int indexBronzeRankThree = 2;
     //private int indexSilverRankOne = 3;
-    [SerializeField] int score;
+    public int score;
     public bool isGameActive;
     public bool isGameOver;
-    public bool isEnterUserName;
-    private string userName;
     [SerializeField] int scoreForPreviousSession;
     [SerializeField] int totalScoreForAllSession;
     [SerializeField] int maxScoreBeforeRankBronzeTwo;
     [SerializeField] int maxScoreBeforeRankBronzeThree;
 
     [SerializeField] GameObject sliderProgressRankBar;
-    [SerializeField] GameObject titleScreen;
     public List<Image> rankImages;
     public List<Image> currentRank;
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI gameOverText;
-    [SerializeField] TextMeshProUGUI welcomeUserText;
-    [SerializeField] TMP_InputField inputUserName;
     [SerializeField] Button restartButton;
+    [SerializeField] Button exitButton;
 
 
 
@@ -40,29 +37,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //Обновление Max Value и Min Value у Progress Rank Slider
+        //LoadTotalScoreForAllSession();
         maxScoreBeforeRankBronzeTwo = 200000;
         maxScoreBeforeRankBronzeThree = 600000;
-
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Предложение ввести имя пользователя, если оно не было введено
-        userName = LoadUserName();
-        Debug.Log(userName);
-        if (userName == "NoName")
-        {
-            inputUserName.gameObject.SetActive(true);
-        }
-        else
-        {
-            welcomeUserText.gameObject.SetActive(true);
-            welcomeUserText.text = "Welcome " + userName;
-
-            isEnterUserName = true;
-
-        }
+        isGameActive = true;
+        score = 0;
+        UpdateScore(0);
+        isGameOver = false;
+        CurrentRank();
+        scoreText.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -98,6 +81,11 @@ public class GameManager : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
             //активация кнопки перезапуска
             restartButton.gameObject.SetActive(true);
+            //актвивация слайдера прогресса
+            sliderProgressRankBar.SetActive(true);
+            //активация кнопки выхода
+            exitButton.gameObject.SetActive(true);
+
             isGameActive = false;
             isGameOver = true;
             //актвивация слайдера прогресса
@@ -115,24 +103,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Установка значий после нажатия на кнопку Start
-    public void StartGame()
-    {
-        if (isEnterUserName)
-        {
-            isGameActive = true;
-            score = 0;
-            UpdateScore(0);
-            titleScreen.gameObject.SetActive(false);
-            isGameOver = false;
-            CurrentRank();
-            welcomeUserText.gameObject.SetActive(false);
-            scoreText.gameObject.SetActive(true);
-        }
-        //PlayerPrefs.DeleteAll();
-
-    }
-
     //Сохранение очков текущей сессии к сумме предыдущих очков
     public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
     {
@@ -147,42 +117,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Ввод имени игрока
-    public void UserName()
-    {
-        //Сохранения текста из строки ввода
-        if (Input.GetButtonDown("Submit"))
-        {
-            //Сохранение имени игрока
-            userName = inputUserName.text;
-            SaveUserName(userName);
-            //Отключение строки ввода
-            inputUserName.gameObject.SetActive(false);
-            //Включение приветствия
-            welcomeUserText.gameObject.SetActive(true);
-            welcomeUserText.text = "Welcome " + userName;
-
-            isEnterUserName = true;
-
-        }
-
-    }
-
-    //Сохранение имени игрока
-    private void SaveUserName(string userName)
-    {
-        PlayerPrefs.SetString("userName", userName);
-    }
-
-    //Загрузка имени игрока
-    private string LoadUserName()
-    {
-        return PlayerPrefs.GetString("userName", "NoName");
-    }
-
-
     //Отображение рангов исходя из количество очков
-    private void CurrentRank()
+    public void CurrentRank()
     {
         totalScoreForAllSession = LoadTotalScoreForAllSession();
         //Отображение ранга Бронза 3
@@ -194,6 +130,16 @@ public class GameManager : MonoBehaviour
         {
             currentRank[indexBronzeRankTwo].gameObject.SetActive(true);
         }
+    }
+
+    //выход из игры
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit(); // original code to quit Unity player
+#endif
     }
 
     //Отображение прогрессии рангов
