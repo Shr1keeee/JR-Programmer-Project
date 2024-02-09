@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] Button restartButton;
     [SerializeField] Button exitButton;
+    [SerializeField] Button mainMenuButton;
 
 
 
@@ -86,16 +87,18 @@ public class GameManager : MonoBehaviour
             //активация кнопки выхода
             exitButton.gameObject.SetActive(true);
 
+            mainMenuButton.gameObject.SetActive(true);
+
             isGameActive = false;
             isGameOver = true;
             //актвивация слайдера прогресса
             sliderProgressRankBar.SetActive(true);
             //получение очков за все предыдущие игровые сессии
-            scoreForPreviousSession = LoadTotalScoreForAllSession();
+            scoreForPreviousSession = MainManager.Instance.LoadTotalScoreForAllSession();
             //Добавление очков из текущей сессии к сумме очков из всех предыдущих 
-            SaveTotalScoreForAllSession(scoreForPreviousSession, score);
+            MainManager.Instance.SaveTotalScoreForAllSession(scoreForPreviousSession, score);
             //получения очков за все игровые сессии
-            totalScoreForAllSession= LoadTotalScoreForAllSession();
+            totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
             //Отображения ранговой прогрессии
             RankPorgression();
 
@@ -103,24 +106,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Сохранение очков текущей сессии к сумме предыдущих очков
-    public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
-    {
-        PlayerPrefs.SetInt("scoreForPreviousSession", scoreForPreviousSession + score);
+    ////Сохранение очков текущей сессии к сумме предыдущих очков
+    //public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
+    //{
+    //    PlayerPrefs.SetInt("scoreForPreviousSession", scoreForPreviousSession + score);
 
-    }
+    //}
 
-    //Загрузка суммы всех очков за все сессии
-    public int LoadTotalScoreForAllSession()
-    {
-        return PlayerPrefs.GetInt("scoreForPreviousSession");
+    ////Загрузка суммы всех очков за все сессии
+    //public int LoadTotalScoreForAllSession()
+    //{
+    //    return PlayerPrefs.GetInt("scoreForPreviousSession");
 
-    }
+    //}
 
     //Отображение рангов исходя из количество очков
     public void CurrentRank()
     {
-        totalScoreForAllSession = LoadTotalScoreForAllSession();
+        totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
         //Отображение ранга Бронза 3
         if (totalScoreForAllSession < maxScoreBeforeRankBronzeTwo)
         {
@@ -140,6 +143,11 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit(); // original code to quit Unity player
 #endif
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     //Отображение прогрессии рангов
