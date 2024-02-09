@@ -12,7 +12,7 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
 
-    private string userName;
+    public string userName;
     public bool isEnterUserName;
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI welcomeUserText;
@@ -20,12 +20,12 @@ public class MenuUIHandler : MonoBehaviour
     [SerializeField] TMP_InputField inputUserName;
 
     //Установка значий после нажатия на кнопку Start
-    private void Start()
+    void Start()
     {
         //Предложение ввести имя пользователя, если оно не было введено
-        userName = LoadUserName();
+        userName = MainManager.Instance.LoadUserName();
         Debug.Log(userName);
-        if (userName == "NoName")
+        if (userName == "")
         {
             inputUserName.gameObject.SetActive(true);
         }
@@ -33,7 +33,7 @@ public class MenuUIHandler : MonoBehaviour
         {
             welcomeUserText.gameObject.SetActive(true);
             welcomeUserText.text = "Welcome " + userName;
-
+            MainManager.Instance.SaveUserName(userName);
             isEnterUserName = true;
 
         }
@@ -54,7 +54,8 @@ public class MenuUIHandler : MonoBehaviour
         {
             //Сохранение имени игрока
             userName = inputUserName.text;
-            SaveUserName(userName);
+            //Сохранение введенного имени;
+            MainManager.Instance.SaveUserName(userName);
             //Отключение строки ввода
             inputUserName.gameObject.SetActive(false);
             //Включение приветствия
@@ -75,18 +76,6 @@ public class MenuUIHandler : MonoBehaviour
 #else
         Application.Quit(); // original code to quit Unity player
 #endif
-    }
-
-    //Сохранение имени игрока
-    private void SaveUserName(string userName)
-    {
-        PlayerPrefs.SetString("userName", userName);
-    }
-
-    //Загрузка имени игрока
-    private string LoadUserName()
-    {
-        return PlayerPrefs.GetString("userName", "NoName");
     }
 
 }
