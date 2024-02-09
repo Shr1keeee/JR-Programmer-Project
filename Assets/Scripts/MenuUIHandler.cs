@@ -25,7 +25,7 @@ public class MenuUIHandler : MonoBehaviour
         //Предложение ввести имя пользователя, если оно не было введено
         userName = MainManager.Instance.LoadUserName();
         Debug.Log(userName);
-        if (userName == "")
+        if (userName == null && !isEnterUserName)
         {
             inputUserName.gameObject.SetActive(true);
         }
