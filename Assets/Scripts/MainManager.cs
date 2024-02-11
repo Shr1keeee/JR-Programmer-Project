@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
@@ -7,8 +5,8 @@ using System;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
-    private string userName;
-    private int totalScore;
+    [SerializeField] string userName;
+    [SerializeField] int totalScore;
 
     private void Awake()
     {
@@ -58,7 +56,6 @@ public class MainManager : MonoBehaviour
         return userName;
     }
 
-
     //Сохранение очков текущей сессии к сумме предыдущих очков
     public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
     {
@@ -82,9 +79,4 @@ public class MainManager : MonoBehaviour
         }
         return totalScore;
     }
-
-
-
-
-
 }
