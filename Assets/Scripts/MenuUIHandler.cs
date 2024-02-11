@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEditor;
 
 [DefaultExecutionOrder(1000)]
@@ -12,11 +8,11 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
 
-    public string userName;
-    public bool isEnterUserName;
+    [SerializeField] string userName;
+    [SerializeField] bool isEnterUserName;
+
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI welcomeUserText;
-
     [SerializeField] TMP_InputField inputUserName;
 
     //Установка значий после нажатия на кнопку Start
@@ -24,7 +20,6 @@ public class MenuUIHandler : MonoBehaviour
     {
         //Предложение ввести имя пользователя, если оно не было введено
         userName = MainManager.Instance.LoadUserName();
-        Debug.Log(userName);
         if (userName == null && !isEnterUserName)
         {
             inputUserName.gameObject.SetActive(true);
@@ -43,7 +38,6 @@ public class MenuUIHandler : MonoBehaviour
     {
 
         SceneManager.LoadScene(1);
-        //PlayerPrefs.DeleteAll();
 
     }
 

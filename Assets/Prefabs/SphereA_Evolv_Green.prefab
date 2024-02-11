@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3967876924030526816}
   - component: {fileID: 3126348377635678667}
   - component: {fileID: 5024138355083773731}
-  - component: {fileID: 5151485770301021900}
   - component: {fileID: 3758505490038038535}
+  - component: {fileID: -6304795618656742637}
   m_Layer: 2
   m_Name: SphereA_Evolv_Green
   m_TagString: SphereA_Evolv_Green
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfaeca7b1542155409da6374633856ac, type: 2}
+  - {fileID: 2100000, guid: 7121bdf539457354090b2912ac006834, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,23 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverTrigger: 0
   gameManager: {fileID: 0}
---- !u!114 &5151485770301021900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3967876924030526817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5f033d1934a64f4abda6a730bc2fc37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  evolvedBalls:
-  - {fileID: 1018978225348478281, guid: 22a1fa1802874204cacfe75880b71d40, type: 3}
-  spawnNewBall: 0
-  pointValueForEvolvedSphereA: 0
-  poinValueForEvolSphereB: 0
 --- !u!114 &3758505490038038535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +143,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba574a82bc78034ba22f8e037b800b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereRb: {fileID: 0}
+--- !u!114 &-6304795618656742637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967876924030526817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cffc1555e526b0469c623fb16331ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evolvedBalls: {fileID: 1018978225348478281, guid: 22a1fa1802874204cacfe75880b71d40, type: 3}
+  spawnNewBall: 0
+  pointValueForEvolvedSphereA: 5000
+  gameManager: {fileID: 0}

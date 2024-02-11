@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfaeca7b1542155409da6374633856ac, type: 2}
+  - {fileID: 2100000, guid: 7121bdf539457354090b2912ac006834, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,11 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cffc1555e526b0469c623fb16331ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evolvedBalls:
-  - {fileID: 3967876924030526817, guid: a42a8810bbf3c2e48a58d01d53461620, type: 3}
+  evolvedBalls: {fileID: 3967876924030526817, guid: a42a8810bbf3c2e48a58d01d53461620, type: 3}
   spawnNewBall: 0
+  pointValueForEvolvedSphereA: 500
   gameManager: {fileID: 0}
-  pointValueForEvolvedSphereA: 0
 --- !u!114 &6509633900304412216
 MonoBehaviour:
   m_ObjectHideFlags: 0

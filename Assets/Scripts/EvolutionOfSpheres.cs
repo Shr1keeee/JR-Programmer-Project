@@ -1,46 +1,29 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class SphereAEvolved : MonoBehaviour
+public class EvolutionOfSpheres : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public List<GameObject> evolvedBalls;
-    public bool spawnNewBall;
-    [SerializeField] int pointValueForEvolvedSphereA;
+    [SerializeField] bool spawnNewBall;
+    public int pointValueForEvolvedSphereA;
 
+    [SerializeField] GameObject evolvedBalls;
     [SerializeField] GameManager gameManager;
-
 
     void Start()
     {
         spawnNewBall = true;
-        pointValueForEvolvedSphereA = 1000;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
-
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 
     //
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("SphereA_Green"))
+        if (collision.gameObject.CompareTag(gameObject.tag))
         {
             //при столкновении сфер присваивается значение false для переменной spawnNewBall
             if (spawnNewBall)
             {
-                collision.gameObject.GetComponent<SphereAEvolved>().spawnNewBall = false;
+                collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
             }
 
             StartCoroutine("RespawnBall");
@@ -55,7 +38,7 @@ public class SphereAEvolved : MonoBehaviour
         //Проверка значения false для переменной spawnNewBall и спавн новой сферы
         if (!spawnNewBall)
         {
-            Instantiate(evolvedBalls[0], transform.position, Quaternion.identity);
+            Instantiate(evolvedBalls, transform.position, Quaternion.identity);
         }
         //удаление обоих объектов столкновения
         Destroy(gameObject);

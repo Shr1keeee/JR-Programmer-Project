@@ -1,20 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using Unity.VisualScripting;
 using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    private int indexBronzeRankOne = 0;
-    private int indexBronzeRankTwo = 1;
-    private int indexBronzeRankThree = 2;
+    [SerializeField] int indexBronzeRankOne = 0;
+    [SerializeField] int indexBronzeRankTwo = 1;
+    [SerializeField] int indexBronzeRankThree = 2;
     //private int indexSilverRankOne = 3;
-    public int score;
+    [SerializeField] int score;
     public bool isGameActive;
     public bool isGameOver;
     [SerializeField] int scoreForPreviousSession;
@@ -23,8 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int maxScoreBeforeRankBronzeThree;
 
     [SerializeField] GameObject sliderProgressRankBar;
-    public List<Image> rankImages;
-    public List<Image> currentRank;
+    [SerializeField] List<Image> rankImages;
+    [SerializeField] List<Image> currentRank;
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI gameOverText;
@@ -47,12 +44,6 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         CurrentRank();
         scoreText.gameObject.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     //Обновление очков в текущей сессии
@@ -102,23 +93,8 @@ public class GameManager : MonoBehaviour
             //Отображения ранговой прогрессии
             RankPorgression();
 
-            //PlayerPrefs.DeleteAll();
         }
     }
-
-    ////Сохранение очков текущей сессии к сумме предыдущих очков
-    //public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
-    //{
-    //    PlayerPrefs.SetInt("scoreForPreviousSession", scoreForPreviousSession + score);
-
-    //}
-
-    ////Загрузка суммы всех очков за все сессии
-    //public int LoadTotalScoreForAllSession()
-    //{
-    //    return PlayerPrefs.GetInt("scoreForPreviousSession");
-
-    //}
 
     //Отображение рангов исходя из количество очков
     public void CurrentRank()

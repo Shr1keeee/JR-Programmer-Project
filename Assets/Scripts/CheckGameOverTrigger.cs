@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckGameOverTrigger : MonoBehaviour
 {
-    public bool isGameOverTrigger;
+    [SerializeField] private bool isGameOverTrigger;
 
     [SerializeField] private GameManager gameManager;
 
@@ -14,13 +12,6 @@ public class CheckGameOverTrigger : MonoBehaviour
         isGameOverTrigger = false;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     private void OnTriggerExit(Collider other)
     {
