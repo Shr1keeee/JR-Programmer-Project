@@ -4,19 +4,24 @@ using UnityEngine;
 public class EvolutionOfSpheres : MonoBehaviour
 {
     [SerializeField] bool spawnNewBall;
-    public int pointValueForEvolvedSphereA;
+    protected int _pointValueForEvolvedGreenSphere;
+    public int pointValueForEvolvedGreenSphere
+    {
+        get { return _pointValueForEvolvedGreenSphere; }
+        set { _pointValueForEvolvedGreenSphere = value; }
+    }
 
     [SerializeField] GameObject evolvedBalls;
     [SerializeField] GameManager gameManager;
 
     void Start()
     {
+        ChangeScoreSpheres();
         spawnNewBall = true;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
-    //
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(gameObject.tag))
         {
@@ -43,8 +48,16 @@ public class EvolutionOfSpheres : MonoBehaviour
         //удаление обоих объектов столкновения
         Destroy(gameObject);
         //Обновление очков
-        gameManager.UpdateScore(pointValueForEvolvedSphereA);
+        gameManager.UpdateScore(pointValueForEvolvedGreenSphere);
         yield return null;
+    }
+
+    private void ChangeScoreSpheres()
+    {
+        if (gameObject.CompareTag("SphereA_Evolv_Green") || gameObject.CompareTag("SphereA_Green") || gameObject.CompareTag("SphereA_Last_Evolve_Green"))
+        {
+            _pointValueForEvolvedGreenSphere = 1000;
+        }
     }
 
 }
