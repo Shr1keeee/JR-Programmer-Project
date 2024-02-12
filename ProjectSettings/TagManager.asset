@@ -10,6 +10,9 @@ TagManager:
   - SphereA_Evolv_Green
   - SphereA_Last_Evolve_Green
   - Welcome_Text
+  - SphereB_Evolv_Blue
+  - SphereB_Blue
+  - SphereB_Last_Evolv_Blue
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int indexSphere;
     public bool isNextSpawn;
     private Vector3 scaleClonePrefab = new Vector3(2, 2, 2);
-    private Vector3 posClonePrefab = new Vector3(9f, 15.32f, 2f);
+    private Vector3 posClonePrefab = new Vector3(6f, 13f, 2f);
 
     public GameObject[] spawnedBalls;
     public GameObject[] evolvedBalls;

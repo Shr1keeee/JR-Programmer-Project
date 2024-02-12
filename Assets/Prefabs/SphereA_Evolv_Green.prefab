@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5024138355083773731}
   - component: {fileID: 3758505490038038535}
   - component: {fileID: -6304795618656742637}
+  - component: {fileID: 2746413283676689943}
   m_Layer: 2
   m_Name: SphereA_Evolv_Green
   m_TagString: SphereA_Evolv_Green
@@ -156,7 +157,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cffc1555e526b0469c623fb16331ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evolvedBalls: {fileID: 1018978225348478281, guid: 22a1fa1802874204cacfe75880b71d40, type: 3}
   spawnNewBall: 0
-  pointValueForEvolvedSphereA: 5000
+  evolvedBalls: {fileID: 1018978225348478281, guid: 22a1fa1802874204cacfe75880b71d40, type: 3}
+  gameManager: {fileID: 0}
+--- !u!114 &2746413283676689943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967876924030526817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51d501f18d4c7c4fa071db328bdf739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnNewBall: 0
+  evolvedBalls: {fileID: 0}
   gameManager: {fileID: 0}
