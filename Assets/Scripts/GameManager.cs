@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Отображение рангов исходя из количество очков
-    public void CurrentRank()
+    public void CurrentRank() //ABSTRACTION 
     {
         totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
         //Отображение ранга Бронза 3

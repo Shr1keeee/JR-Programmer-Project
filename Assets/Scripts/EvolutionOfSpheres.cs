@@ -5,7 +5,7 @@ public class EvolutionOfSpheres : MonoBehaviour
 {
     [SerializeField] bool spawnNewBall;
     protected int _pointValueForEvolutionSphere;
-    public int PointValueForEvolutionSphere
+    public int PointValueForEvolutionSphere //ENCAPSULATION 
     {
         get { return _pointValueForEvolutionSphere; }
         set { _pointValueForEvolutionSphere = value; }
@@ -52,7 +52,7 @@ public class EvolutionOfSpheres : MonoBehaviour
         yield return null;
     }
 
-    public virtual void ChangeScoreSpheres()
+    public virtual void ChangeScoreSpheres() //POLYMORPHISM 
     {
             PointValueForEvolutionSphere = 0;
     }

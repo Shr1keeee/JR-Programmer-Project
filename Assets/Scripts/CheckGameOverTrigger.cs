@@ -23,7 +23,6 @@ public class CheckGameOverTrigger : MonoBehaviour
 
     }
 
-   
     private void OnTriggerEnter(Collider other)
     {
         //Проверка наличия признака isGameOverTrigger при повторном столкновении

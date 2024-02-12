@@ -1,5 +1,5 @@
 
-public class EvolutionOfGreenSpheres : EvolutionOfSpheres
+public class EvolutionOfGreenSpheres : EvolutionOfSpheres // INHERITANCE
 {
     public override void ChangeScoreSpheres()
     {
