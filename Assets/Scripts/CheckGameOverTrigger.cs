@@ -16,7 +16,7 @@ public class CheckGameOverTrigger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         //При первом столкновении с триггером, присваивается признак, по которому выполняется проверка при повторном столкновении
-        if (other.gameObject.CompareTag("GameOverTrigger") && isGameOverTrigger == false)
+        if (other.gameObject.CompareTag("GameOverTrigger") && !isGameOverTrigger)
         {
             isGameOverTrigger = true;
         }
