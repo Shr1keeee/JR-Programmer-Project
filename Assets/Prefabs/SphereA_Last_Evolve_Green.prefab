@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1018978225348478283}
   - component: {fileID: 1018978225348478280}
   - component: {fileID: 1321697704339425763}
-  - component: {fileID: 8975053319678535435}
   - component: {fileID: 9109511429949700270}
   m_Layer: 2
   m_Name: SphereA_Last_Evolve_Green
@@ -108,28 +107,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018978225348478281}
   serializedVersion: 2
-  m_Mass: 50000
-  m_Drag: 0
-  m_AngularDrag: 500
+  m_Mass: 1000
+  m_Drag: 0.7
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!114 &8975053319678535435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018978225348478281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b216d93df5b0f5d4081e774839f2f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameOverTrigger: 0
-  gameManager: {fileID: 0}
 --- !u!114 &9109511429949700270
 MonoBehaviour:
   m_ObjectHideFlags: 0
