@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6904311500393963752}
   - component: {fileID: 6904311500393963751}
   - component: {fileID: 6904311500393963750}
-  - component: {fileID: 2329814286533751163}
   - component: {fileID: 6509633900304412216}
   - component: {fileID: -6309523024341723288}
   m_Layer: 2
@@ -109,28 +108,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6904311500393963749}
   serializedVersion: 2
-  m_Mass: 50000
-  m_Drag: 0
-  m_AngularDrag: 500
+  m_Mass: 1000
+  m_Drag: 0.7
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!114 &2329814286533751163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6904311500393963749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b216d93df5b0f5d4081e774839f2f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameOverTrigger: 0
-  gameManager: {fileID: 0}
 --- !u!114 &6509633900304412216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,5 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnNewBall: 0
+  isGameOverTrigger: 0
   evolvedBalls: {fileID: 3967876924030526817, guid: a42a8810bbf3c2e48a58d01d53461620, type: 3}
   gameManager: {fileID: 0}

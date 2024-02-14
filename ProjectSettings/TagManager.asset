@@ -13,6 +13,8 @@ TagManager:
   - SphereB_Evolv_Blue
   - SphereB_Blue
   - SphereB_Last_Evolv_Blue
+  - Score_Text
+  - Name_Text
   layers:
   - Default
   - TransparentFX

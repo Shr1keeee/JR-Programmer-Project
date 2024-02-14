@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using System.Collections.Generic;
+using Dan.Main;
 
 [DefaultExecutionOrder(1000)]
 
@@ -14,6 +16,9 @@ public class MenuUIHandler : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI welcomeUserText;
     [SerializeField] TMP_InputField inputUserName;
+    [SerializeField] GameObject titleScreen;
+    [SerializeField] GameObject leaderboardScreen;
+
 
     //Установка значий после нажатия на кнопку Start
     void Start()
@@ -59,9 +64,23 @@ public class MenuUIHandler : MonoBehaviour
             isEnterUserName = true;
 
         }
-
+    }
+    
+    //Переход в таблицу лидеров
+    public void ShowLeaderboard()
+    {
+        
+        MainManager.Instance.GetLeaderboard();
+        titleScreen.gameObject.SetActive(false);
+        leaderboardScreen.gameObject.SetActive(true);
     }
 
+    //Переход из таблицы лидеров в меню
+    public void BackToMenu()
+    {
+        titleScreen.gameObject.SetActive(true);
+        leaderboardScreen.gameObject.SetActive(false); 
+    }
     //выход из игры
     public void Exit()
     {

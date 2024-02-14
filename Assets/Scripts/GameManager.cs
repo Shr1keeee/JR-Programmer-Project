@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int totalScoreForAllSession;
     [SerializeField] int maxScoreBeforeRankBronzeTwo;
     [SerializeField] int maxScoreBeforeRankBronzeThree;
+    [SerializeField] int maxScoreBeforeRankBronzeOne;
 
     [SerializeField] GameObject sliderProgressRankBar;
     [SerializeField] List<Image> rankImages;
@@ -28,16 +29,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button restartButton;
     [SerializeField] Button exitButton;
     [SerializeField] Button mainMenuButton;
-
-
+    [SerializeField] GameObject menuManager;
 
 
     private void Awake()
     {
+       
         //Обновление Max Value и Min Value у Progress Rank Slider
         //LoadTotalScoreForAllSession();
         maxScoreBeforeRankBronzeTwo = 200000;
-        maxScoreBeforeRankBronzeThree = 600000;
+        maxScoreBeforeRankBronzeThree = 6000000;
         isGameActive = true;
         score = 0;
         UpdateScore(0);
@@ -90,6 +91,8 @@ public class GameManager : MonoBehaviour
             MainManager.Instance.SaveTotalScoreForAllSession(scoreForPreviousSession, score);
             //получения очков за все игровые сессии
             totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
+            string userName = MainManager.Instance.LoadUserName();
+            MainManager.Instance.Setleadrboard(userName, totalScoreForAllSession);
             //Отображения ранговой прогрессии
             RankPorgression();
 
@@ -153,5 +156,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+
 
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 public class EvolutionOfSpheres : MonoBehaviour
 {
     [SerializeField] bool spawnNewBall;
+    [SerializeField] private bool isGameOverTrigger;
+    [SerializeField] private float _maxRangeY;
+
     protected int _pointValueForEvolutionSphere;
     public int PointValueForEvolutionSphere //ENCAPSULATION 
     {
@@ -18,6 +21,8 @@ public class EvolutionOfSpheres : MonoBehaviour
     {
         ChangeScoreSpheres();
         spawnNewBall = true;
+        isGameOverTrigger = false;
+        _maxRangeY = 13.0f;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
@@ -30,8 +35,15 @@ public class EvolutionOfSpheres : MonoBehaviour
             {
                 collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
             }
-
             StartCoroutine("RespawnBall");
+        }
+
+        //при столкновении сфер выполняется проверка высоты по Y и если она выше установленной, то наступает конец игры
+        if (collision.gameObject.transform.position.y > _maxRangeY)
+        {
+            isGameOverTrigger = true;
+            //Инициация конца игры
+            gameManager.GameOver(isGameOverTrigger);
 
         }
 

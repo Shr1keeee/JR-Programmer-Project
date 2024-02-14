@@ -1,23 +1,27 @@
 using UnityEngine;
 using System.IO;
 using System;
+using Dan.Main;
+using System.Collections.Generic;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
     [SerializeField] string userName;
     [SerializeField] int totalScore;
+    public List<TextMeshProUGUI> names;
+    public List<TextMeshProUGUI> scores;
+
+    private string _publicLeaderboardKey =
+       "8d9bcd97a20136e5f38205e75af3c4af2efd0e997fd9b642cc8da88c0c0e40cd";
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
-        Instance = this; 
-        DontDestroyOnLoad(gameObject);
+
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
     }
 
     [Serializable]
@@ -78,5 +82,26 @@ public class MainManager : MonoBehaviour
             totalScore = data.totalScore;
         }
         return totalScore;
+    }
+
+    //загрузка таблицы лидеров
+    public void GetLeaderboard()
+    {
+
+        LeaderboardCreator.GetLeaderboard(_publicLeaderboardKey, ((msg) =>
+        {
+            int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
+            for (int i = 0; i < loopLength; i++)
+            {
+                names[i].text = msg[i].Username;
+                scores[i].text = msg[i].Score.ToString();
+            }
+        }));
+    }
+
+    //создание новой записи в таблице результатов
+    public void Setleadrboard(string userName, int score)
+    {
+        LeaderboardCreator.UploadNewEntry(_publicLeaderboardKey, userName, score);
     }
 }

@@ -12,4 +12,7 @@ public class StoppedSphereRotation : MonoBehaviour
     {
         sphereRb.rotation = Quaternion.identity;
     }
+
+
+    
 }

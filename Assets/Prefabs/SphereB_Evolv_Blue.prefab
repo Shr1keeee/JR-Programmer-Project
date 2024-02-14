@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4404380099646289973}
   - component: {fileID: 4404380099646289974}
   - component: {fileID: 2408368200840361117}
-  - component: {fileID: 5743893137682029173}
   - component: {fileID: -2572919356935779454}
   m_Layer: 2
   m_Name: SphereB_Evolv_Blue
@@ -108,28 +107,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4404380099646289975}
   serializedVersion: 2
-  m_Mass: 50000
-  m_Drag: 0
-  m_AngularDrag: 500
+  m_Mass: 1000
+  m_Drag: 0.7
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!114 &5743893137682029173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404380099646289975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b216d93df5b0f5d4081e774839f2f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameOverTrigger: 0
-  gameManager: {fileID: 0}
 --- !u!114 &-2572919356935779454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,5 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnNewBall: 0
+  isGameOverTrigger: 0
   evolvedBalls: {fileID: 3180125438358731221, guid: d2fd9de9eb9119e4f9fcfb2350542020, type: 3}
   gameManager: {fileID: 0}
