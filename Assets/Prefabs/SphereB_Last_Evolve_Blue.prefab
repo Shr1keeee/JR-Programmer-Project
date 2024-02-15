@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3180125438358731220}
   - component: {fileID: 3481754750370116991}
   - component: {fileID: 6660063060902544434}
+  - component: {fileID: -962171787613406340}
   m_Layer: 2
   m_Name: SphereB_Last_Evolve_Blue
   m_TagString: SphereB_Last_Evolv_Blue
@@ -128,3 +129,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereRb: {fileID: 0}
+--- !u!114 &-962171787613406340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3180125438358731221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b276a85c659884784209f43e6e9a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnNewBall: 0
+  isGameOverTrigger: 0
+  _maxRangeY: 0
+  evolvedBalls: {fileID: 0}
+  gameManager: {fileID: 0}

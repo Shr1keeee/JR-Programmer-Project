@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1018978225348478280}
   - component: {fileID: 1321697704339425763}
   - component: {fileID: 9109511429949700270}
+  - component: {fileID: -2995813585452954525}
   m_Layer: 2
   m_Name: SphereA_Last_Evolve_Green
   m_TagString: SphereA_Last_Evolve_Green
@@ -128,3 +129,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereRb: {fileID: 0}
+--- !u!114 &-2995813585452954525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018978225348478281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51d501f18d4c7c4fa071db328bdf739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnNewBall: 0
+  isGameOverTrigger: 0
+  _maxRangeY: 0
+  evolvedBalls: {fileID: 0}
+  gameManager: {fileID: 0}

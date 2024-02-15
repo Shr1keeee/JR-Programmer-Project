@@ -24,8 +24,9 @@ public class MenuUIHandler : MonoBehaviour
     void Start()
     {
         //Предложение ввести имя пользователя, если оно не было введено
-        userName = MainManager.Instance.LoadUserName();
-        if (userName == null && !isEnterUserName)
+        userName = MainManager.Instance.GetUserName();
+        Debug.Log(userName);
+        if (userName == "" && !isEnterUserName)
         {
             inputUserName.gameObject.SetActive(true);
         }
@@ -33,7 +34,7 @@ public class MenuUIHandler : MonoBehaviour
         {
             welcomeUserText.gameObject.SetActive(true);
             welcomeUserText.text = "Welcome " + userName;
-            MainManager.Instance.SaveUserName(userName);
+            MainManager.Instance.SetUserName(userName);
             isEnterUserName = true;
 
         }
@@ -54,7 +55,7 @@ public class MenuUIHandler : MonoBehaviour
             //Сохранение имени игрока
             userName = inputUserName.text;
             //Сохранение введенного имени;
-            MainManager.Instance.SaveUserName(userName);
+            MainManager.Instance.SetUserName(userName);
             //Отключение строки ввода
             inputUserName.gameObject.SetActive(false);
             //Включение приветствия

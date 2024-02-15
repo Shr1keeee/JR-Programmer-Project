@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,16 +6,16 @@ public class SpawnManager : MonoBehaviour
 {
 
     [SerializeField] float distanceOfRay = 11.0f;
-    public bool isActiveClickButton;
+    protected bool isActiveClickButton;
     [SerializeField] private int indexSphere;
     public bool isNextSpawn;
     private Vector3 scaleClonePrefab = new Vector3(2, 2, 2);
     private Vector3 posClonePrefab = new Vector3(6f, 13f, 2f);
 
-    public GameObject[] spawnedBalls;
-    public GameObject[] evolvedBalls;
-    private GameObject clonePrefab;
-    public GameObject originalPrefab;
+    [SerializeField] GameObject[] spawnedBalls;
+    [SerializeField] GameObject[] evolvedBalls;
+    [SerializeField] GameObject clonePrefab;
+    protected GameObject originalPrefab;
     [SerializeField] GameObject gameOverTrigger;
     
 
@@ -36,7 +35,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         //Создание оригинала экземпляра сферы
-        if (gameManager.isGameActive) //&& isActiveClickButton
+        if (gameManager.isGameActive) // && isActiveClickButton
         {
             SpawnAtMousePos();
 
@@ -53,6 +52,7 @@ public class SpawnManager : MonoBehaviour
     //Спавн сферы на полжении курсара и по ЛКМ 
     public void SpawnAtMousePos()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             //определение положения мыши для представления луча
@@ -74,12 +74,36 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(DelayTooClick());
 
         }
+
+        //foreach (UnityEngine.Touch touch in Input.touches)
+        //{
+        //    if (touch.phase == UnityEngine.TouchPhase.Began)
+        //    {
+        //        Ray ray = Camera.main.ScreenPointToRay(touch.position);
+        //        //При столкновении луча с Collider возвращается true и спавнится сфера
+        //        if (Physics.Raycast(ray))
+        //        {
+        //            //Создание оригинала экземпляра сферы
+        //            originalPrefab = Instantiate(spawnedBalls[indexSphere], ray.GetPoint(distanceOfRay), Quaternion.identity);
+        //            //Отключение возможности спама ЛКМ
+        //            isActiveClickButton = false;
+        //            //Изменение с false на true для запуска метода создания клона экземпляра сферы
+        //            isNextSpawn = true;
+        //            //Уничтожение клона экземпляра сферы
+        //            Destroy(clonePrefab);
+
+        //        }
+
+        //        StartCoroutine(DelayTooClick());
+
+        //    }
+        //}
     }
 
     //Дилей между нажатиями ЛКМ
     IEnumerator DelayTooClick()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         isActiveClickButton = true;
     }
 
@@ -101,6 +125,4 @@ public class SpawnManager : MonoBehaviour
             isNextSpawn = false;
         }
     }
-
-
 }

@@ -10,25 +10,22 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
     [SerializeField] string userName;
     [SerializeField] int totalScore;
-    public List<TextMeshProUGUI> names;
-    public List<TextMeshProUGUI> scores;
+    [SerializeField] List<TextMeshProUGUI> names;
+    [SerializeField] List<TextMeshProUGUI> scores;
 
     private string _publicLeaderboardKey =
        "8d9bcd97a20136e5f38205e75af3c4af2efd0e997fd9b642cc8da88c0c0e40cd";
 
     private void Awake()
     {
-
-
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     [Serializable]
-    class SaveDataUserName
+    class SaveUserName
     {
         public string userName;
-        
     }
 
     [Serializable]
@@ -38,43 +35,42 @@ public class MainManager : MonoBehaviour
     }
 
     //Сохранение имени пользоваетля
-    public void SaveUserName(string userName)
+    public void SetUserName(string userName)
     {
-        SaveDataUserName data = new SaveDataUserName();
+        SaveUserName data = new SaveUserName();
         data.userName = userName;
-        
+
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/usernamesavefile.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/saveusername.json", json);
     }
 
-    //Загрузка имени пользователя
-    public string LoadUserName()
+    //Сохранение всех полученных очков
+    public void SetTotalScore(int totalScore)
     {
-        string path = Application.persistentDataPath + "/usernamesavefile.json";
+        SaveDataScore data = new SaveDataScore();
+        data.totalScore = totalScore;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savetotalscore.json", json);
+    }
+
+    //Получение имени пользователя
+    public string GetUserName()
+    {
+        string path = Application.persistentDataPath + "/saveusername.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveDataUserName data = JsonUtility.FromJson<SaveDataUserName>(json);
+            SaveUserName data = JsonUtility.FromJson<SaveUserName>(json);
             userName = data.userName;
         }
         return userName;
     }
 
-    //Сохранение очков текущей сессии к сумме предыдущих очков
-    public void SaveTotalScoreForAllSession(int scoreForPreviousSession, int score)
+    //Получение всех очков
+    public int GetTotalScore()
     {
-        SaveDataScore data = new SaveDataScore();
-        data.totalScore = scoreForPreviousSession + score;
-
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/totalscoresavefile.json", json);
-
-    }
-
-    //Загрузка всех очков
-    public int LoadTotalScoreForAllSession()
-    {
-        string path = Application.persistentDataPath + "/totalscoresavefile.json";
+        string path = Application.persistentDataPath + "/savetotalscore.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
@@ -100,8 +96,9 @@ public class MainManager : MonoBehaviour
     }
 
     //создание новой записи в таблице результатов
-    public void Setleadrboard(string userName, int score)
+    public void Setleadrboard(string userName, int totalScore)
     {
-        LeaderboardCreator.UploadNewEntry(_publicLeaderboardKey, userName, score);
+        LeaderboardCreator.UploadNewEntry(_publicLeaderboardKey, userName, totalScore);
     }
+
 }
