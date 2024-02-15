@@ -28,23 +28,36 @@ public class EvolutionOfSpheres : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(gameObject.tag))
+        if (collision.gameObject.CompareTag("SphereA_Last_Evolve_Green") && gameObject.CompareTag("SphereA_Last_Evolve_Green"))
         {
-            //при столкновении сфер присваивается значение false для переменной spawnNewBall
-            if (spawnNewBall)
-            {
-                collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
-            }
-            StartCoroutine("RespawnBall");
+            Destroy(gameObject);
+            gameManager.UpdateScore(PointValueForEvolutionSphere);
+        } 
+        else if(collision.gameObject.CompareTag("SphereB_Last_Evolv_Blue") && gameObject.CompareTag("SphereB_Last_Evolv_Blue"))
+        {
+            Destroy(gameObject);
+            gameManager.UpdateScore(PointValueForEvolutionSphere);
         }
-
-        //при столкновении сфер выполняется проверка высоты по Y и если она выше установленной, то наступает конец игры
-        if (collision.gameObject.transform.position.y > _maxRangeY)
+        else
         {
-            isGameOverTrigger = true;
-            //Инициация конца игры
-            gameManager.GameOver(isGameOverTrigger);
+            if (collision.gameObject.CompareTag(gameObject.tag))
+            {
+                //при столкновении сфер присваивается значение false для переменной spawnNewBall
+                if (spawnNewBall)
+                {
+                    collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
+                }
+                StartCoroutine("RespawnBall");
+            }
 
+            //при столкновении сфер выполняется проверка высоты по Y и если она выше установленной, то наступает конец игры
+            if (collision.gameObject.transform.position.y > _maxRangeY)
+            {
+                isGameOverTrigger = true;
+                //Инициация конца игры
+                gameManager.GameOver(isGameOverTrigger);
+
+            }
         }
 
     }
@@ -56,6 +69,8 @@ public class EvolutionOfSpheres : MonoBehaviour
         if (!spawnNewBall)
         {
             Instantiate(evolvedBalls, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            gameManager.UpdateScore(PointValueForEvolutionSphere);
         }
         //удаление обоих объектов столкновения
         Destroy(gameObject);

@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int maxScoreBeforeRankBronzeTwo;
     [SerializeField] int maxScoreBeforeRankBronzeThree;
     [SerializeField] int maxScoreBeforeRankBronzeOne;
+    private int totalScore;
+    private string userName;
 
     [SerializeField] GameObject sliderProgressRankBar;
     [SerializeField] List<Image> rankImages;
@@ -34,9 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-       
-        //Обновление Max Value и Min Value у Progress Rank Slider
-        //LoadTotalScoreForAllSession();
+        scoreForPreviousSession = MainManager.Instance.GetTotalScore();
         maxScoreBeforeRankBronzeTwo = 200000;
         maxScoreBeforeRankBronzeThree = 6000000;
         isGameActive = true;
@@ -78,31 +78,28 @@ public class GameManager : MonoBehaviour
             sliderProgressRankBar.SetActive(true);
             //активация кнопки выхода
             exitButton.gameObject.SetActive(true);
-
+            //активация основной кнопки меню
             mainMenuButton.gameObject.SetActive(true);
-
             isGameActive = false;
             isGameOver = true;
             //актвивация слайдера прогресса
             sliderProgressRankBar.SetActive(true);
             //получение очков за все предыдущие игровые сессии
-            scoreForPreviousSession = MainManager.Instance.LoadTotalScoreForAllSession();
-            //Добавление очков из текущей сессии к сумме очков из всех предыдущих 
-            MainManager.Instance.SaveTotalScoreForAllSession(scoreForPreviousSession, score);
+            totalScore = scoreForPreviousSession + score;
+            userName = MainManager.Instance.GetUserName();
+            MainManager.Instance.SetTotalScore(totalScore);
+            Debug.Log("Game over total score: " + totalScore);
+            MainManager.Instance.Setleadrboard(userName, totalScore);
             //получения очков за все игровые сессии
-            totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
-            string userName = MainManager.Instance.LoadUserName();
-            MainManager.Instance.Setleadrboard(userName, totalScoreForAllSession);
             //Отображения ранговой прогрессии
             RankPorgression();
-
         }
     }
 
     //Отображение рангов исходя из количество очков
     public void CurrentRank() //ABSTRACTION 
     {
-        totalScoreForAllSession = MainManager.Instance.LoadTotalScoreForAllSession();
+        totalScoreForAllSession = scoreForPreviousSession;
         //Отображение ранга Бронза 3
         if (totalScoreForAllSession < maxScoreBeforeRankBronzeTwo)
         {
@@ -133,20 +130,20 @@ public class GameManager : MonoBehaviour
     private void RankPorgression()
     {
         //Отображение прогресса рангов бронза 3 -> 2
-        if (totalScoreForAllSession < maxScoreBeforeRankBronzeTwo)
+        if (totalScore < maxScoreBeforeRankBronzeTwo)
         {
             //Присовение новых значений для слайдера прогресса
-            sliderProgressRankBar.GetComponent<Slider>().value = totalScoreForAllSession;
+            sliderProgressRankBar.GetComponent<Slider>().value = totalScore;
             rankImages[indexBronzeRankThree].gameObject.SetActive(true);
             rankImages[indexBronzeRankTwo].gameObject.SetActive(true);
         }
         //Отображение прогресса рангов бронза 2 -> 1
-        if (totalScoreForAllSession > maxScoreBeforeRankBronzeTwo)
+        if (totalScore > maxScoreBeforeRankBronzeTwo)
         {
             //Присовение новых значений для слайдера прогресса
             sliderProgressRankBar.GetComponent<Slider>().minValue = maxScoreBeforeRankBronzeTwo;
             sliderProgressRankBar.GetComponent<Slider>().maxValue = maxScoreBeforeRankBronzeThree;
-            sliderProgressRankBar.GetComponent<Slider>().value = totalScoreForAllSession;
+            sliderProgressRankBar.GetComponent<Slider>().value = totalScore;
             //Перемещение изобращения ранга бронза 2 на позицию бронза 3
             rankImages[indexBronzeRankTwo].gameObject.transform.position = new Vector3(rankImages[indexBronzeRankThree].transform.position.x, rankImages[indexBronzeRankThree].transform.position.y);
             //активация новых рангов и деактивация ранга бронза 
