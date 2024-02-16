@@ -6,14 +6,13 @@ public class SpawnManager : MonoBehaviour
 {
 
     [SerializeField] float distanceOfRay = 11.0f;
-    protected bool isActiveClickButton;
+    public bool isActiveClickButton;
     [SerializeField] private int indexSphere;
     public bool isNextSpawn;
     private Vector3 scaleClonePrefab = new Vector3(2, 2, 2);
     private Vector3 posClonePrefab = new Vector3(6f, 13f, 2f);
 
     [SerializeField] GameObject[] spawnedBalls;
-    [SerializeField] GameObject[] evolvedBalls;
     [SerializeField] GameObject clonePrefab;
     protected GameObject originalPrefab;
     [SerializeField] GameObject gameOverTrigger;
@@ -35,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         //Создание оригинала экземпляра сферы
-        if (gameManager.isGameActive) // && isActiveClickButton
+        if (gameManager.isGameActive && isActiveClickButton) // && isActiveClickButton
         {
             SpawnAtMousePos();
 
@@ -103,7 +102,7 @@ public class SpawnManager : MonoBehaviour
     //Дилей между нажатиями ЛКМ
     IEnumerator DelayTooClick()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         isActiveClickButton = true;
     }
 

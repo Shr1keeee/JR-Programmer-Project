@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] int indexBronzeRankThree = 2;
     //private int indexSilverRankOne = 3;
     [SerializeField] int score;
-    public bool isGameActive;
-    public bool isGameOver;
     [SerializeField] int scoreForPreviousSession;
     [SerializeField] int totalScoreForAllSession;
     [SerializeField] int maxScoreBeforeRankBronzeTwo;
     [SerializeField] int maxScoreBeforeRankBronzeThree;
     [SerializeField] int maxScoreBeforeRankBronzeOne;
+    public bool isGameActive;
+    public bool isGameOver;
     private int totalScore;
     private string userName;
 

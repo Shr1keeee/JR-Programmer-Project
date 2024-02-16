@@ -19,7 +19,6 @@ public class MenuUIHandler : MonoBehaviour
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject leaderboardScreen;
 
-
     //Установка значий после нажатия на кнопку Start
     void Start()
     {

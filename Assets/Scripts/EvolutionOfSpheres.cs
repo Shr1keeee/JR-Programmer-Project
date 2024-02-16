@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class EvolutionOfSpheres : MonoBehaviour
 {
-    [SerializeField] bool spawnNewBall;
-    [SerializeField] private bool isGameOverTrigger;
-    [SerializeField] private float _maxRangeY;
+    private bool spawnNewBall;
+    private bool isGameOverTrigger;
 
     protected int _pointValueForEvolutionSphere;
     public int PointValueForEvolutionSphere //ENCAPSULATION 
@@ -13,6 +12,8 @@ public class EvolutionOfSpheres : MonoBehaviour
         get { return _pointValueForEvolutionSphere; }
         set { _pointValueForEvolutionSphere = value; }
     }
+
+    [SerializeField] private float _maxRangeY;
 
     [SerializeField] GameObject evolvedBalls;
     [SerializeField] GameManager gameManager;
@@ -32,8 +33,8 @@ public class EvolutionOfSpheres : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.UpdateScore(PointValueForEvolutionSphere);
-        } 
-        else if(collision.gameObject.CompareTag("SphereB_Last_Evolv_Blue") && gameObject.CompareTag("SphereB_Last_Evolv_Blue"))
+        }
+        else if (collision.gameObject.CompareTag("SphereB_Last_Evolv_Blue") && gameObject.CompareTag("SphereB_Last_Evolv_Blue"))
         {
             Destroy(gameObject);
             gameManager.UpdateScore(PointValueForEvolutionSphere);
@@ -58,6 +59,7 @@ public class EvolutionOfSpheres : MonoBehaviour
                 gameManager.GameOver(isGameOverTrigger);
 
             }
+
         }
 
     }
