@@ -31,14 +31,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3967876924030526817}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0, w: -1}
   m_LocalPosition: {x: -0.305, y: -1.205, z: -2.3023534}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 360, z: 0}
 --- !u!33 &3967876924030526818
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7121bdf539457354090b2912ac006834, type: 2}
+  - {fileID: 2100000, guid: 25ba6e6caa74495428a8d8a1843ac8ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
   _maxRangeY: 0
   evolvedBalls: {fileID: 1018978225348478281, guid: 22a1fa1802874204cacfe75880b71d40, type: 3}
   gameManager: {fileID: 0}
-  collisionSound: {fileID: 8300000, guid: d1acdd0a73a7f234c886fa3936379693, type: 3}
-  source: {fileID: 0}
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!114 &2746413283676689943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +163,8 @@ MonoBehaviour:
   _maxRangeY: 0
   evolvedBalls: {fileID: 0}
   gameManager: {fileID: 0}
-  collisionSound: {fileID: 0}
-  source: {fileID: 0}
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!82 &5311402180447107206
 AudioSource:
   m_ObjectHideFlags: 0
@@ -175,9 +175,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d1acdd0a73a7f234c886fa3936379693, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.06
   m_Pitch: 1
   Loop: 0
   Mute: 0

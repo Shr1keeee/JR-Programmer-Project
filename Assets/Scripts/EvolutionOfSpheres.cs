@@ -7,7 +7,7 @@ public class EvolutionOfSpheres : MonoBehaviour
     private bool isGameOverTrigger;
 
     protected int _pointValueForEvolutionSphere;
-    public int PointValueForEvolutionSphere //ENCAPSULATION 
+    public int PointValueForEvolutionSphere 
     {
         get { return _pointValueForEvolutionSphere; }
         set { _pointValueForEvolutionSphere = value; }
@@ -17,6 +17,8 @@ public class EvolutionOfSpheres : MonoBehaviour
 
     [SerializeField] GameObject evolvedBalls;
     [SerializeField] GameManager gameManager;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
 
     void Start()
     {
@@ -25,43 +27,54 @@ public class EvolutionOfSpheres : MonoBehaviour
         isGameOverTrigger = false;
         _maxRangeY = 13.0f;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected void OnCollisionEnter(Collision collision)
     {
+        if (audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+        
         if (collision.gameObject.CompareTag("SphereA_Last_Evolve_Green") && gameObject.CompareTag("SphereA_Last_Evolve_Green"))
         {
             Destroy(gameObject);
             gameManager.UpdateScore(PointValueForEvolutionSphere);
         }
-        else if (collision.gameObject.CompareTag("SphereB_Last_Evolv_Blue") && gameObject.CompareTag("SphereB_Last_Evolv_Blue"))
+        if (collision.gameObject.CompareTag("SphereB_Last_Evolv_Blue") && gameObject.CompareTag("SphereB_Last_Evolv_Blue"))
         {
             Destroy(gameObject);
             gameManager.UpdateScore(PointValueForEvolutionSphere);
         }
-        else
+        if (collision.gameObject.CompareTag("SphereC_Last_Evolv_Yellow") && gameObject.CompareTag("SphereC_Last_Evolv_Yellow"))
         {
-            if (collision.gameObject.CompareTag(gameObject.tag))
-            {
-                //при столкновении сфер присваивается значение false для переменной spawnNewBall
-                if (spawnNewBall)
-                {
-                    collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
-                }
-                StartCoroutine("RespawnBall");
-            }
-
-            //при столкновении сфер выполняется проверка высоты по Y и если она выше установленной, то наступает конец игры
-            if (collision.gameObject.transform.position.y > _maxRangeY)
-            {
-                isGameOverTrigger = true;
-                //Инициация конца игры
-                gameManager.GameOver(isGameOverTrigger);
-
-            }
-
+            Destroy(gameObject);
+            gameManager.UpdateScore(PointValueForEvolutionSphere);
         }
 
+        if (collision.gameObject.CompareTag(gameObject.tag))
+        {
+            //при столкновении сфер присваивается значение false для переменной spawnNewBall
+            if (spawnNewBall)
+            {
+                collision.gameObject.GetComponent<EvolutionOfSpheres>().spawnNewBall = false;
+            }
+
+            if (evolvedBalls != null)
+            {
+                StartCoroutine("RespawnBall");
+            }
+        }
+
+        //при столкновении сфер выполняется проверка высоты по Y и если она выше установленной, то наступает конец игры
+        if (collision.gameObject.transform.position.y > _maxRangeY)
+        {
+            isGameOverTrigger = true;
+            //Инициация конца игры
+            gameManager.GameOver(isGameOverTrigger);
+
+        }
     }
 
     //Спавн новой сферы
