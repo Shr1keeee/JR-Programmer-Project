@@ -34,13 +34,13 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         //Создание оригинала экземпляра сферы
-        if (gameManager.isGameActive && isActiveClickButton) // && isActiveClickButton
+        if (!gameManager.isGameOver) // && isActiveClickButton
         {
             SpawnAtMousePos();
 
         }
         //Создания клона экземпляра сферы 
-        if (gameManager.isGameActive && isNextSpawn)
+        if (!gameManager.isGameOver && isNextSpawn)
         {
             PreviewInstantiateSphere();
 

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI gameOverText;
+    [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] Button restartButton;
     [SerializeField] Button exitButton;
     [SerializeField] Button mainMenuButton;
@@ -45,6 +46,29 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         CurrentRank();
         scoreText.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (isGameActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isGameActive = false;
+                PauseGame();
+            }
+
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                isGameActive = true;
+                ResumeGame();
+            }
+
+        }
+
     }
 
     //Обновление очков в текущей сессии
@@ -80,12 +104,13 @@ public class GameManager : MonoBehaviour
             exitButton.gameObject.SetActive(true);
             //активация основной кнопки меню
             mainMenuButton.gameObject.SetActive(true);
-            isGameActive = false;
             isGameOver = true;
             //актвивация слайдера прогресса
             sliderProgressRankBar.SetActive(true);
             //получение очков за все предыдущие игровые сессии
             totalScore = scoreForPreviousSession + score;
+            totalScoreText.text = "Total score: " + totalScore;
+            totalScoreText.gameObject.SetActive(true);
             userName = MainManager.Instance.GetUserName();
             MainManager.Instance.SetTotalScore(totalScore);
             Debug.Log("Game over total score: " + totalScore);
@@ -108,6 +133,30 @@ public class GameManager : MonoBehaviour
         else
         {
             currentRank[indexBronzeRankTwo].gameObject.SetActive(true);
+        }
+    }
+
+
+    public void PauseGame()
+    {
+        if (!isGameActive && !isGameOver)
+        {
+            Time.timeScale = 0f;
+            // активация кнопки выхода
+            exitButton.gameObject.SetActive(true);
+            //активация основной кнопки меню
+            mainMenuButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (isGameActive && !isGameOver)
+        {
+            Time.timeScale = 1f;
+            exitButton.gameObject.SetActive(false);
+            //активация основной кнопки меню
+            mainMenuButton.gameObject.SetActive(false);
         }
     }
 

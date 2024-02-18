@@ -2,8 +2,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-using System.Collections.Generic;
-using Dan.Main;
 
 [DefaultExecutionOrder(1000)]
 
@@ -16,6 +14,7 @@ public class MenuUIHandler : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] TextMeshProUGUI welcomeUserText;
     [SerializeField] TMP_InputField inputUserName;
+    [SerializeField] TextMeshProUGUI enterNameText;
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject leaderboardScreen;
 
@@ -25,9 +24,11 @@ public class MenuUIHandler : MonoBehaviour
         //Предложение ввести имя пользователя, если оно не было введено
         userName = MainManager.Instance.GetUserName();
         Debug.Log(userName);
+        Debug.Log(isEnterUserName);
         if (userName == "" && !isEnterUserName)
         {
             inputUserName.gameObject.SetActive(true);
+            enterNameText.gameObject.SetActive(true);
         }
         else
         {
@@ -41,8 +42,10 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartGame()
     {
-
-        SceneManager.LoadScene(1);
+        if (isEnterUserName)
+        {
+            SceneManager.LoadScene(1);
+        }
 
     }
 
@@ -51,19 +54,20 @@ public class MenuUIHandler : MonoBehaviour
         //Сохранения текста из строки ввода
         if (Input.GetButtonDown("Submit"))
         {
-            //Сохранение имени игрока
-            userName = inputUserName.text;
-            //Сохранение введенного имени;
-            MainManager.Instance.SetUserName(userName);
-            //Отключение строки ввода
-            inputUserName.gameObject.SetActive(false);
-            //Включение приветствия
-            welcomeUserText.gameObject.SetActive(true);
-            welcomeUserText.text = "Welcome " + userName;
+                //Сохранение имени игрока
+                userName = inputUserName.text;
+                //Сохранение введенного имени;
+                MainManager.Instance.SetUserName(userName);
+                //Отключение строки ввода
+                inputUserName.gameObject.SetActive(false);
+                //Включение приветствия
+                welcomeUserText.gameObject.SetActive(true);
+                welcomeUserText.text = "Welcome " + userName;
 
-            isEnterUserName = true;
+                isEnterUserName = true;
 
         }
+
     }
     
     //Переход в таблицу лидеров
