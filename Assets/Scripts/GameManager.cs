@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     //Отображение прогрессии рангов
