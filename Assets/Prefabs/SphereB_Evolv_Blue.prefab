@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2408368200840361117}
   - component: {fileID: -2572919356935779454}
   - component: {fileID: 304149452082432537}
+  - component: {fileID: 9155699469997087431}
   m_Layer: 2
   m_Name: SphereB_Evolv_Blue
   m_TagString: SphereB_Evolv_Blue
@@ -229,3 +230,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9155699469997087431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404380099646289975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba574a82bc78034ba22f8e037b800b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereRb: {fileID: 0}
