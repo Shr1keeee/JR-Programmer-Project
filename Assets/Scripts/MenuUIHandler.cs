@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 [DefaultExecutionOrder(1000)]
@@ -31,8 +30,6 @@ public class MenuUIHandler : MonoBehaviour
     {
         //Предложение ввести имя пользователя, если оно не было введено
         userName = MainManager.Instance.GetUserName();
-        Debug.Log(userName);
-        Debug.Log(isEnterUserName);
         if (userName == "" && !isEnterUserName)
         {
             inputUserName.gameObject.SetActive(true);
